@@ -1,0 +1,39 @@
+@import  '../../shared/variables/_colors.scss';
+.navbar{
+    background-color: $light-bg;
+    color: $light-color;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    padding: 0;
+    height: 100vh;
+    .navbar-brand{
+        color:$light-color;
+    }
+    .navbar-collapse{
+        background-color: $dark-bg;
+        padding: 1rem 2rem;
+        transition: height 0.4s linear;
+        height: 100vh;
+        color: $light-color;
+    }
+    .navbar-nav{
+        .nav-link{
+            color: $light-color;
+            font-weight: 600;
+        }
+    }
+}
+.fa-1x {
+    font-size: 1.5rem;
+}
+
+.navbar-toggler.toggler-example {
+    cursor: pointer;
+    background-color: $light-bg;
+    border-color: $light-color;
+    margin:1rem 1.5rem 1rem 3rem;
+}
+
+.dark-blue-text {
+    color: $light-color;
+}

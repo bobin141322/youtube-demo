@@ -1,0 +1,7 @@
+<div class="card">
+    <img class="card-img-top" src="{{item.snippet.thumbnails.medium.url}}" alt="Video youtube image"/>
+    <caption class="card-title">{{item.snippet.title|formatText}}</caption>
+    <span>{{item.snippet.channelTitle}}</span>
+    <!-- <span class="card-text">{{item.snippet.description}}</span> -->
+    <span class="video--date">{{item.snippet.publishedAt| date}}</span>
+</div>
