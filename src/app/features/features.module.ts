@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FeaturessRoutingModule } from './features-routing.module';
 import { VideoDetailComponent, VideoItemComponent, VideoListComponent } from './index';
 import { ShareModule } from '../shared/share.module';
-
+//import { Store } from '@ngrx/store';
 
 @NgModule({
   imports: [

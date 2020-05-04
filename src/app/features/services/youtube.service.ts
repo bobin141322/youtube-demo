@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
+import { Video } from '../models/video';
 
 
 @Injectable({
@@ -85,7 +86,7 @@ export class YoutubeService {
     }
   }
 
-  async searchVideo(query: string): Observable<any[] {
+  searchVideo(query: string) {
     try {
       const res = this.http
         .get(
@@ -94,11 +95,10 @@ export class YoutubeService {
           }&type=video&regionCode=${this.regionCode}&key=${
           this.apiKey
           }`
-        );
-       // .map(res => res.json().items || []);
+        );//.map(res => res.json().items || []);
       return res;
-    } catch {
-      return this.defaultObject;
+    } catch (error) {
+      return error;
     }
   }
 

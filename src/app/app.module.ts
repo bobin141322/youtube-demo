@@ -11,7 +11,8 @@ import { FeaturesModule } from './features/features.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import {YoutubeService} from './features/services/youtube.service';
-import { FormatTextPipe } from './shared/pipe/format-text.pipe';
+import { StoreModule } from '@ngrx/store';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormatTextPipe } from './shared/pipe/format-text.pipe';
     LayoutModule,
     FeaturesModule,
     HttpClientModule,
-    ShareModule
+    ShareModule,
+    StoreModule.forRoot({})
   ],
   exports: [],
   providers: [YoutubeService ],

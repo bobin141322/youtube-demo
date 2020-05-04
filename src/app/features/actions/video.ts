@@ -1,8 +1,9 @@
 import { Action } from '@ngrx/store';
 import { Video } from '../models/video';
 
-export const SEARCH = '[Book] Search';
-export const SEARCH_COMPLETE = '[Book] Search Complete';
+export const SEARCH = '[Video] Search';
+export const SEARCH_COMPLETE = '[Video] Search Complete';
+export const LOAD = '[Video] Load';
 
 export class SearchAction implements Action {
     readonly type = SEARCH;
@@ -16,6 +17,10 @@ export class SearchCompleteAction implements Action {
     constructor(public payload: Video[]) { }
 }
 
+export class LoadAction implements Action {
+    readonly type = LOAD;
+    constructor(public payload: Video) { }
+}
+
 export type Actions
-    = SearchAction
-    | SearchCompleteAction;
+    = SearchAction | SearchCompleteAction | LoadAction;
