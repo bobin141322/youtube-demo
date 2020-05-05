@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {YoutubeService} from './features/services/youtube.service';
 import { StoreModule } from '@ngrx/store';
+import { reducer, metaReducers } from './features/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { StoreModule } from '@ngrx/store';
     FeaturesModule,
     HttpClientModule,
     ShareModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot(reducer),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   exports: [],
   providers: [YoutubeService ],

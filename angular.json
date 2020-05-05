@@ -128,6 +128,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "youtube-app"
+    }
+  },
+  "defaultProject": "youtube-app",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
