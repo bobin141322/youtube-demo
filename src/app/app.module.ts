@@ -15,6 +15,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducer, metaReducers } from './features/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { VideoEffects } from './features/effects/video';
 
 
 @NgModule({
@@ -30,11 +32,12 @@ import { environment } from '../environments/environment';
     FeaturesModule,
     HttpClientModule,
     ShareModule,
-    StoreModule.forRoot(reducer),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    StoreModule.forRoot(reducer({}, {})),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([])
   ],
   exports: [],
-  providers: [YoutubeService ],
+  providers: [YoutubeService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

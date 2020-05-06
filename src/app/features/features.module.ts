@@ -4,6 +4,8 @@ import { FeaturessRoutingModule } from './features-routing.module';
 import { VideoDetailComponent, VideoItemComponent, VideoListComponent } from './index';
 import { ShareModule } from '../shared/share.module';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { VideoEffects } from './effects/video';
 
 @NgModule({
   imports: [
@@ -11,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
     FeaturessRoutingModule,
     ShareModule,
     StoreModule,
+    EffectsModule.forFeature([VideoEffects])
   ],
   exports: [],
   declarations: [

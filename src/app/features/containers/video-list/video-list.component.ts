@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {YoutubeService} from '../../services/youtube.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as action from '../../actions/video';
 import * as fromRoot from '../../reducers/index';
 import { Video } from '../../models/video';
+
 
 
 @Component({
@@ -17,7 +18,7 @@ export class VideoListComponent implements OnInit {
   videoList: [any];
   constructor(private youtube: YoutubeService, store: Store<fromRoot.State>) {
     store.dispatch(new action.SearchAction('kid'));
-    this.video$ =  store.select(fromRoot.getSearchResults);
+    this.video$ =  store.pipe(select(fromRoot.getSearchResults));
     //this.video$ = store.
    }
 

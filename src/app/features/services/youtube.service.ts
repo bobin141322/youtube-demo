@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { Video } from '../models/video';
 
@@ -88,15 +88,16 @@ export class YoutubeService {
 
   searchVideo(query: string) {
     try {
-      const res = this.http
+      const data = this.http
         .get(
           `${this.url}search?part=snippet&q=${query}&maxResults=${
           this.numRelatedRes
           }&type=video&regionCode=${this.regionCode}&key=${
           this.apiKey
           }`
-        );//.map(res => res.json().items || []);
-      return res;
+      ).pipe(tap(res => console.log(res)), map( res => res['items']));
+        console.log(data);
+      return data;
     } catch (error) {
       return error;
     }

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/takeUntil';
 import { Injectable } from '@angular/core';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions, ofType  } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
@@ -13,27 +13,42 @@ import { of } from 'rxjs/observable/of';
 
 import { YoutubeService } from '../services/youtube.service';
 import * as video from '../actions/video';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class VideoEffects {
 
   @Effect()
-  search$: Observable<Action> = this.actions$
-    .ofType(video.SEARCH)
-    .debounceTime(300)
-    .map(toPayload)
+  search$: Observable<Action> = this.actions$.pipe(
+    ofType( video.SEARCH ))
     .switchMap(query => {
       if (query === '') {
         return empty();
       }
 
-      const nextSearch$ = this.actions$.ofType(video.SEARCH).skip(1);
+      const nextSearch$ = this.actions$.pipe(ofType(video.SEARCH)).skip(1);
 
       return this.youtube.searchVideo(query)
-        //.takeUntil(nextSearch$)
         .map(videos => new video.SearchCompleteAction(videos))
         .catch(() => of(new video.SearchCompleteAction([])));
     });
+  
+  // this.actions$
+  //   .pipe(ofType(video.SEARCH))
+  //   .debounceTime(300)
+  //   .map(toPayload)
+  //   .switchMap(query => {
+  //     if (query === '') {
+  //       return empty();
+  //     }
+
+  //     const nextSearch$ = this.actions$.pipe(ofType(video.SEARCH).skip(1));
+
+  //     return this.youtube.searchVideo(query)
+  //       //.takeUntil(nextSearch$)
+  //       .map(videos => new video.SearchCompleteAction(videos))
+  //       .catch(() => of(new video.SearchCompleteAction([])));
+  //   });
 
     constructor(private actions$: Actions, private youtube: YoutubeService) { }
 }

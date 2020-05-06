@@ -25,8 +25,8 @@ const reducers = {
     videos: fromVideos.reducer
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<State> = combineReducers(reducers);
+const developmentReducer = compose(storeFreeze, combineReducers)(reducers);
+const productionReducer = combineReducers(reducers);
 
 export function reducer(state: any, action: any) {
     if (environment.production) {
@@ -39,15 +39,15 @@ export function reducer(state: any, action: any) {
 export const getVideosState = (state: State) => state.videos;
 export const getSearchState = (state: State) => state.search;
 
-export const getBookEntities = createSelector(getVideosState, fromVideos.getEntities);
-export const getBookIds = createSelector(getVideosState, fromVideos.getIds);
+export const getVideoEntities = createSelector(getVideosState, fromVideos.getEntities);
+export const getVideoIds = createSelector(getVideosState, fromVideos.getIds);
 export const getSelectedVideoId = createSelector(getVideosState, fromVideos.getSelectedId);
-export const getSelectedBook = createSelector(getVideosState, fromVideos.getSelected);
+export const getSelectedVideo = createSelector(getVideosState, fromVideos.getSelected);
 
 export const getSearchVideoIds = createSelector(getSearchState, fromSearch.getIds);
 export const getSearchQuery = createSelector(getSearchState, fromSearch.getQuery);
 export const getSearchLoading = createSelector(getSearchState, fromSearch.getLoading);
 
-export const getSearchResults = createSelector(getBookEntities, getSearchVideoIds, (videos, searchIds) => {
+export const getSearchResults = createSelector(getVideoEntities, getSearchVideoIds, (videos, searchIds) => {
     return searchIds.map(id => videos[id]);
 });
