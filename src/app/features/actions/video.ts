@@ -24,3 +24,4 @@ export class LoadAction implements Action {
 
 export type Actions
     = SearchAction | SearchCompleteAction | LoadAction;
+    

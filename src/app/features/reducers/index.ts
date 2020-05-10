@@ -11,6 +11,14 @@ import { environment } from '../../../environments/environment';
 import { combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
+import {
+    StoreRouterConnectingModule,
+    routerReducer,
+    RouterReducerState,
+    RouterStateSerializer
+  } from '@ngrx/router-store';
+import { Params, RouterStateSnapshot } from '@angular/router';
+import { Video } from '../models/video';
 
 export interface State {
     search: fromSearch.State;
@@ -18,9 +26,18 @@ export interface State {
 
 }
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+export interface RouterStateUrl {
+    url: string;
+    params: Params;
+    queryParams: Params;
+  }
 
-const reducers = {
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+export const selectStarshipsState = createFeatureSelector<State>(
+   'youtube'
+  );
+
+export const reducers: ActionReducerMap<State> = {
     search: fromSearch.reducer,
     videos: fromVideos.reducer
 };
@@ -51,3 +68,21 @@ export const getSearchLoading = createSelector(getSearchState, fromSearch.getLoa
 export const getSearchResults = createSelector(getVideoEntities, getSearchVideoIds, (videos, searchIds) => {
     return searchIds.map(id => videos[id]);
 });
+
+export const selectReducerState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
+export const getRouterInfo = createSelector(
+  selectReducerState,
+  state => state.state
+);
+
+export const getCurrentVideo = createSelector(
+    fromVideos.getEntities,
+    getRouterInfo,
+    (videos, routerInfo) => {
+      if (videos && routerInfo) {
+        const id = +routerInfo.params.id;
+        return videos[id];
+      }
+      return null;
+    }
+  );

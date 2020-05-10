@@ -6,13 +6,16 @@ import { ShareModule } from '../shared/share.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { VideoEffects } from './effects/video';
+import { reducers } from './reducers/index';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     FeaturessRoutingModule,
     ShareModule,
-    StoreModule,
+    StoreModule.forFeature('youtube', reducers),
     EffectsModule.forFeature([VideoEffects])
   ],
   exports: [],

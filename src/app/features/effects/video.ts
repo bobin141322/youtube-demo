@@ -32,7 +32,8 @@ export class VideoEffects {
         .map(videos => new video.SearchCompleteAction(videos))
         .catch(() => of(new video.SearchCompleteAction([])));
     });
-  
+
+
   // this.actions$
   //   .pipe(ofType(video.SEARCH))
   //   .debounceTime(300)

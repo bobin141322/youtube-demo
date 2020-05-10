@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {YoutubeService} from './features/services/youtube.service';
 import { StoreModule } from '@ngrx/store';
-import { reducer, metaReducers } from './features/reducers';
+import { reducers, metaReducers } from './features/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -32,7 +32,7 @@ import { VideoEffects } from './features/effects/video';
     FeaturesModule,
     HttpClientModule,
     ShareModule,
-    StoreModule.forRoot(reducer({}, {})),
+    StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([])
   ],

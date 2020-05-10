@@ -95,8 +95,8 @@ export class YoutubeService {
           }&type=video&regionCode=${this.regionCode}&key=${
           this.apiKey
           }`
-      ).pipe(tap(res => console.log(res)), map( res => res['items']));
-        console.log(data);
+        ).pipe(tap(res => console.log(res)), map(res => res['items']));
+      console.log(data);
       return data;
     } catch (error) {
       return error;
@@ -104,16 +104,16 @@ export class YoutubeService {
   }
 
 
-  async getChannel(channelId){
+  async getChannel(channelId) {
 
     try {
       const res = await this.http
         .get(
           `${this.url}channels?id=${channelId}&part=snippet&key=${
-            this.apiKey
-            }&order=date&maxResults=20&regionCode=${
-              this.regionCode
-              }`
+          this.apiKey
+          }&order=date&maxResults=20&regionCode=${
+          this.regionCode
+          }`
         )
         .pipe(map(response => response))
         .toPromise();
@@ -123,7 +123,8 @@ export class YoutubeService {
     }
   }
 
-  // getVideoDetail(videoId) {
-  //   return this.http.get(`https://www.youtube.com/watch?v=q0maMKiz7CM`);
-  // }
+  getVideoDetail(videoId) {
+    return this.http.get(`${this.url}part=${videoId}+snippet&id=${videoId}&key=${this.apiKey}`);
+  }
+
 }

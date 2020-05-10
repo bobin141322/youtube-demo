@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {YoutubeService} from '../../services/youtube.service';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -16,10 +17,9 @@ import { Video } from '../../models/video';
 export class VideoListComponent implements OnInit {
   video$: Observable<Video[]>;
   videoList: [any];
-  constructor(private youtube: YoutubeService, store: Store<fromRoot.State>) {
+  constructor(private youtube: YoutubeService, store: Store<fromRoot.State>, private route: ActivatedRoute, private router: Router) {
     store.dispatch(new action.SearchAction('kid'));
     this.video$ =  store.pipe(select(fromRoot.getSearchResults));
-    //this.video$ = store.
    }
 
   ngOnInit(): void {
@@ -53,5 +53,9 @@ export class VideoListComponent implements OnInit {
     //   // });
     //   this.videoList = data.items;
     // });
+  }
+
+  openVideoDetail(event){
+    this.router.navigate(['/video-detail', { id: event.id.videoId}]);
   }
 }

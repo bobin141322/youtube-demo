@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-//import { FormatTextPipe } from '../../../shared/pipe/format-text.pipe';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-video-item',
@@ -8,9 +7,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class VideoItemComponent implements OnInit {
   @Input() item: any;
+  @Output() openVideoDetail = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  openDetail(event) {
+    this.openVideoDetail.emit(event);
+  }
 }

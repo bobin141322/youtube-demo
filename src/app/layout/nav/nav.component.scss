@@ -15,6 +15,9 @@
         transition: height 0.4s linear;
         height: 100vh;
         color: $light-color;
+        position: absolute;
+        left: 138px;
+        z-index: 9;
     }
     .navbar-nav{
         .nav-link{
