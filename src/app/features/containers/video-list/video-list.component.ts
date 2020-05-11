@@ -56,6 +56,6 @@ export class VideoListComponent implements OnInit {
   }
 
   openVideoDetail(event){
-    this.router.navigate(['/video-detail', { id: event.id.videoId}]);
+    this.router.navigate(['/video-detail', { queryParams: { id: event.id.videoId }}]);
   }
 }

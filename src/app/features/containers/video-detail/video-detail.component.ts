@@ -20,9 +20,11 @@ export class VideoDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private sanitize: DomSanitizer, private store: Store) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.videoURL();
-    this.getDetailVideo();
+    // this.id = this.route.snapshot.paramMap.get('id');
+    // this.videoURL();
+    // this.getDetailVideo();
+    this.video$ = this.store.pipe(select(fromRoot.getCurrentVideo));
+    //this.video$ =  this.store.pipe(select(fromRoot.getSearchResults));
   }
 
   videoURL() {
@@ -30,6 +32,6 @@ export class VideoDetailComponent implements OnInit {
   }
 
   getDetailVideo(){
-      this.video$ = this.store.pipe(select(fromRoot.getCurrentVideo));
+     // this.video$ = this.store.pipe(select(fromRoot.getCurrentVideo));
   }
 }

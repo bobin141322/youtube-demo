@@ -1,5 +1,5 @@
 <h1>Video detail</h1>
-<div *ngIf="(video$ | async) != null">
+<div *ngIf="(video$ | async)">
     <h2>{{(video$ | async).snippet.title}}</h2>
 </div>
 

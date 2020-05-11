@@ -12,11 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {YoutubeService} from './features/services/youtube.service';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './features/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { VideoEffects } from './features/effects/video';
+import {
+  StoreRouterConnectingModule,
+  RouterStateSerializer
+} from '@ngrx/router-store';
+import {reducers, metaReducers, CustomSerializer} from './features/reducers/route';
 
 
 @NgModule({
@@ -31,13 +34,16 @@ import { VideoEffects } from './features/effects/video';
     LayoutModule,
     FeaturesModule,
     HttpClientModule,
-    ShareModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+    }),
+    ShareModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([])
   ],
   exports: [],
-  providers: [YoutubeService],
+  providers: [YoutubeService, { provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

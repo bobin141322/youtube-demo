@@ -7,6 +7,11 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { VideoEffects } from './effects/video';
 import { reducers } from './reducers/index';
+import * as fromRoot from './reducers/route';
+import {
+  StoreRouterConnectingModule,
+  RouterStateSerializer
+} from '@ngrx/router-store';
 
 
 

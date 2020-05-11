@@ -18,7 +18,7 @@ import {
     RouterStateSerializer
   } from '@ngrx/router-store';
 import { Params, RouterStateSnapshot } from '@angular/router';
-import { Video } from '../models/video';
+import * as formRoot from '../reducers/route';
 
 export interface State {
     search: fromSearch.State;
@@ -69,15 +69,9 @@ export const getSearchResults = createSelector(getVideoEntities, getSearchVideoI
     return searchIds.map(id => videos[id]);
 });
 
-export const selectReducerState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
-export const getRouterInfo = createSelector(
-  selectReducerState,
-  state => state.state
-);
-
 export const getCurrentVideo = createSelector(
     fromVideos.getEntities,
-    getRouterInfo,
+    formRoot.getRouterInfo,
     (videos, routerInfo) => {
       if (videos && routerInfo) {
         const id = +routerInfo.params.id;
@@ -86,3 +80,5 @@ export const getCurrentVideo = createSelector(
       return null;
     }
   );
+
+// export const getCurrentVideo = createSelector(getSearchState, fromSearch.getIds);
