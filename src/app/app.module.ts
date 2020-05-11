@@ -20,7 +20,7 @@ import {
   RouterStateSerializer
 } from '@ngrx/router-store';
 import {reducers, metaReducers, CustomSerializer} from './features/reducers/route';
-
+export const stateKey = 'router';
 
 @NgModule({
   declarations: [
@@ -34,16 +34,17 @@ import {reducers, metaReducers, CustomSerializer} from './features/reducers/rout
     LayoutModule,
     FeaturesModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
-    StoreRouterConnectingModule.forRoot({
-      stateKey: 'router',
-    }),
     ShareModule,
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([])
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer,
+      stateKey,
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   exports: [],
-  providers: [YoutubeService, { provide: RouterStateSerializer, useClass: CustomSerializer }],
+  providers: [YoutubeService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

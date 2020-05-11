@@ -12,7 +12,7 @@ import {
     RouterStateSerializer
 } from '@ngrx/router-store';
 
-import { Params, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Params, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
@@ -52,6 +52,10 @@ export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
         return { url, params, queryParams };
     }
 
+    private findFirstChild(route: ActivatedRouteSnapshot): ActivatedRouteSnapshot {
+        return route.firstChild ? this.findFirstChild(route.firstChild) : route;
+    }
+
 }
     // Reducer selectors
 export const selectReducerState = createFeatureSelector<
@@ -61,3 +65,4 @@ export const getRouterInfo = createSelector(
     selectReducerState,
     state => state.state
 );
+
