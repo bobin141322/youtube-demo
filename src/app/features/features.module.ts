@@ -10,9 +10,11 @@ import { reducers } from './reducers/index';
 import * as fromRoot from './reducers/route';
 import {
   StoreRouterConnectingModule,
-  RouterStateSerializer
+  RouterStateSerializer,
+  routerReducer
 } from '@ngrx/router-store';
 
+export const stateKey = 'router';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import {
     FeaturessRoutingModule,
     ShareModule,
     StoreModule.forFeature('youtube', reducers),
+    StoreModule.forFeature(stateKey, routerReducer),
     EffectsModule.forFeature([VideoEffects])
   ],
   exports: [],
