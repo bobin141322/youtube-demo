@@ -1,5 +1,4 @@
 import {
-    ActionReducer,
     ActionReducerMap,
     createFeatureSelector,
     createSelector,
@@ -11,20 +10,14 @@ import { environment } from '../../../environments/environment';
 import { combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
-import {
-    StoreRouterConnectingModule,
-    routerReducer,
-    RouterReducerState,
-    RouterStateSerializer
-  } from '@ngrx/router-store';
 import { Params, RouterStateSnapshot } from '@angular/router';
-import * as formRoot from '../reducers/route';
+import * as fromRoute from '../reducers/route';
 
 export interface State {
     search: fromSearch.State;
     videos: fromVideos.State;
-
 }
+
 
 export interface RouterStateUrl {
     url: string;
@@ -70,11 +63,11 @@ export const getSearchResults = createSelector(getVideoEntities, getSearchVideoI
 });
 
 export const getCurrentVideo = createSelector(
-    fromVideos.getEntities,
-    formRoot.getRouterInfo,
+    getVideoEntities,
+    fromRoute.getRouterInfo,
     (videos, routerInfo) => {
       if (videos && routerInfo) {
-        const id = +routerInfo.params.id;
+        const id = routerInfo.params.id;
         return videos[id];
       }
       return null;

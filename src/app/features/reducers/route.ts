@@ -15,12 +15,15 @@ import {
 import { ActivatedRouteSnapshot, Params, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import * as fromRoot from '../reducers/index';
 
 export interface State {
+   // root: any;
     router: RouterReducerState<RouterStateUrl>;
 }
 
 export const reducers: ActionReducerMap<State> = {
+    //root: fromRoot.reducer,
     router: routerReducer
 };
 

@@ -20,6 +20,7 @@ import {
   RouterStateSerializer
 } from '@ngrx/router-store';
 import {reducers, metaReducers, CustomSerializer} from './features/reducers/route';
+import * as fromRoot from './features/reducers/index';
 export const stateKey = 'router';
 
 @NgModule({
@@ -36,6 +37,7 @@ export const stateKey = 'router';
     HttpClientModule,
     ShareModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(fromRoot.reducers),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
