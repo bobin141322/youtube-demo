@@ -22,6 +22,7 @@ import {
 import {reducers, metaReducers, CustomSerializer} from './features/reducers/route';
 import * as fromRoot from './features/reducers/index';
 export const stateKey = 'router';
+import {AuthGuard} from './authGuard';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ export const stateKey = 'router';
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   exports: [],
-  providers: [YoutubeService],
+  providers: [YoutubeService,AuthGuard],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

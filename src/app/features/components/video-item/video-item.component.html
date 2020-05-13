@@ -4,4 +4,14 @@
     <span>{{item.snippet.channelTitle}}</span>
     <!-- <span class="card-text">{{item.snippet.description}}</span> -->
     <span class="video--date">{{item.snippet.publishedAt| date}}</span>
+
+    <button *favoriteBtn="false" class="favorite-btn long">
+        <span class="fa fa-heart-o"></span>
+        <b>Add to Favorite</b>
+    </button>
+      <ng-template [favoriteBtn]="true">
+        <button class="favorite-btn">
+            <span class="fa fa-heart-o"></span>
+        </button>
+      </ng-template> 
 </div>

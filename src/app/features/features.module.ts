@@ -9,10 +9,9 @@ import { VideoEffects } from './effects/video';
 import { reducers } from './reducers/index';
 import * as fromRoot from './reducers/route';
 import {
-  StoreRouterConnectingModule,
-  RouterStateSerializer,
   routerReducer
 } from '@ngrx/router-store';
+import { FavoriteBtnDirective } from './directives/favorite-btn.directive';
 
 export const stateKey = 'router';
 
@@ -30,7 +29,8 @@ export const stateKey = 'router';
   declarations: [
     VideoListComponent,
     VideoDetailComponent,
-    VideoItemComponent
+    VideoItemComponent,
+    FavoriteBtnDirective
   ],
   providers: []
 })

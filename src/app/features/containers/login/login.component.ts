@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 declare const FB: any;
@@ -8,9 +8,9 @@ declare const FB: any;
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-   userID = '';
+  userID = '';
   userName = '';
-  constructor( private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     (window as any).fbAsyncInit = () => {
       FB.init({
         appId: '226824298664756',
@@ -31,33 +31,34 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
-  checkLoginFBStatus(){
+  checkLoginFBStatus() {
     FB.getLoginStatus((res) => {
+      if (res.authResponse) {
+        this.userID = res.authResponse.userID;
+        this.getInformationFB();
+      } else {
+        FB.login((response) => {
+          console.log('submitLogin', response);
+          if (response.authResponse) {
+            this.userID = response.authResponse.userID;
+            this.getInformationFB();
+          }
+          else {
+            console.log('User login failed');
+          }
+        });
+      }
       console.log(res.status);
     });
   }
   signInWithFacebook() {
-    //FB.logout();
-    //this.checkLoginFBStatus();
-    FB.login((response) => {
-      console.log('submitLogin', response);
-      if (response.authResponse) {
-        this.userID = response.authResponse.userID;
-        this.getInformationFB();
-        //login success
-        //login success code here
-        //redirect to home page
-      }
-      else {
-        console.log('User login failed');
-      }
-    });
+    this.checkLoginFBStatus();
   }
 
-  getInformationFB(){
+  getInformationFB() {
     FB.api('/me', (response) => {
       console.log(response);
       this.userName = response.name;
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/video-list']);
   }
 
-  writeLoginInfo(){
+  writeLoginInfo() {
     const user = {
       userName: this.userName,
       userId: this.userID

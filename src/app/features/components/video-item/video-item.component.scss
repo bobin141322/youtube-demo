@@ -10,4 +10,14 @@
         text-align: right;
         color: #c1c1c1;
     }
+    .favorite-btn{
+        width: 50px;
+        border: none;
+        border-radius: 6px;
+        background-color: #ff7842;
+        color:#e5f4e3;
+        &:hover{
+            opacity: 0.6;
+        }
+    }
 }

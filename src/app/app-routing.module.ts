@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VideoListComponent, LoginComponent } from './features/index'
-import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { AuthGuard } from './authGuard';
 
-const routes: Routes = [];
-// const routes: Routes = [
-//   {
-//     path: '',
-//     children: [
-//       { path: 'login', component: LoginComponent },
-//       // { path: 'video-list', component: VideoListComponent },
-//     ],
-
-//   },
+//const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: LoginComponent,
+    // canActivate: [AuthGuard],
+  },
+  // { path: '**', redirectTo: '' }
+  ];
 //   {
 //     path: '',
 //     component: MainLayoutComponent,

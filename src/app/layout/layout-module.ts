@@ -4,7 +4,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NavComponent } from './nav/nav.component';
 import { HeaderComponent } from './header/header.component';
 import {LayoutRoutingModule} from './layout-routing-module';
-//import {FlexLayoutModule} from '@angular/flex-layout';
+import {AuthGuard} from '../authGuard';
 
 
 @NgModule({

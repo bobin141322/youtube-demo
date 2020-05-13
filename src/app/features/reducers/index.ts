@@ -74,4 +74,3 @@ export const getCurrentVideo = createSelector(
     }
   );
 
-// export const getCurrentVideo = createSelector(getSearchState, fromSearch.getIds);
