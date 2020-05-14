@@ -8,12 +8,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class VideoItemComponent implements OnInit {
   @Input() item: any;
   @Output() openVideoDetail = new EventEmitter<any>();
+  @Output() addFavorite = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
   }
-
-  openDetail(event) {
-    this.openVideoDetail.emit(event);
+  addCollection(event) {
+      this.addFavorite.emit(event);
   }
 }

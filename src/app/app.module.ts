@@ -23,6 +23,8 @@ import {reducers, metaReducers, CustomSerializer} from './features/reducers/rout
 import * as fromRoot from './features/reducers/index';
 export const stateKey = 'router';
 import {AuthGuard} from './authGuard';
+import { DBModule } from '@ngrx/db';
+import { schema } from './db';
 
 @NgModule({
   declarations: [
@@ -44,10 +46,11 @@ import {AuthGuard} from './authGuard';
       serializer: CustomSerializer,
       stateKey,
     }),
+    DBModule.provideDB(schema),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   exports: [],
-  providers: [YoutubeService,AuthGuard],
+  providers: [YoutubeService, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

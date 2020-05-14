@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { VideoListComponent, LoginComponent, VideoDetailComponent } from './index';
+import { VideoListComponent, LoginComponent, VideoDetailComponent, FavoriteVideoComponent } from './index';
 
 
 
@@ -16,6 +16,10 @@ const routes: Routes = [
     {
         path: 'video-detail/:id',
         component: VideoDetailComponent
+    },
+    {
+        path: 'collection',
+        component: FavoriteVideoComponent
     }
 ];
 

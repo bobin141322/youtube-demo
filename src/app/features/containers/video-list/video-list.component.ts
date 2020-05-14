@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {YoutubeService} from '../../services/youtube.service';
+import { YoutubeService } from '../../services/youtube.service';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as action from '../../actions/video';
+import * as collection from '../../actions/collection';
 import * as fromRoot from '../../reducers/index';
 import { Video } from '../../models/video';
 
@@ -17,10 +18,13 @@ import { Video } from '../../models/video';
 export class VideoListComponent implements OnInit {
   video$: Observable<Video[]>;
   videoList: [any];
-  constructor(private youtube: YoutubeService, store: Store<fromRoot.State>, private route: ActivatedRoute, private router: Router) {
-    store.dispatch(new action.SearchAction('kid'));
-    this.video$ =  store.pipe(select(fromRoot.getSearchResults));
-   }
+  constructor(
+    private youtube: YoutubeService,
+    private store: Store<fromRoot.State>,
+    private route: ActivatedRoute, private router: Router) {
+   // store.dispatch(new action.SearchAction('kid'));
+    //this.video$ = store.pipe(select(fromRoot.getSearchResults));
+  }
 
   ngOnInit(): void {
     //this.getCategories();
@@ -36,14 +40,14 @@ export class VideoListComponent implements OnInit {
     });
   }
 
-  getChannels(){
+  getChannels() {
     const channelId = 'UUhTMiw43iw4w-ggOEXmPtfg';
     this.youtube.getChannel(channelId).then(res => {
       console.log(res);
     });
   }
 
-  getSearch(){
+  getSearch() {
     // const query = 'kid';
     // this.youtube.searchVideo(query).then(res => {
     //   let data = JSON.parse(JSON.stringify(res));
@@ -55,7 +59,11 @@ export class VideoListComponent implements OnInit {
     // });
   }
 
-  openVideoDetail(event){
-    this.router.navigate(['/video-detail', { queryParams: { id: event.id.videoId }}]);
+  openVideoDetail(event) {
+    this.router.navigate(['/video-detail', { queryParams: { id: event.id.videoId } }]);
+  }
+
+  addFavorite(event) {
+    this.store.dispatch(new collection.AddVideoAction(event));
   }
 }
