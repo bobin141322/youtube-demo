@@ -8,13 +8,14 @@ import {
   routerReducer
 } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
-import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     LayoutRoutingModule,
+    FormsModule,
     StoreModule.forFeature('router', routerReducer),
   ],
   exports: [],

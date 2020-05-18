@@ -86,11 +86,11 @@ export class YoutubeService {
     }
   }
 
-  searchVideo(query: string) {
+  searchVideo(query) {
     try {
       const data = this.http
         .get(
-          `${this.url}search?part=snippet&q=${query}&maxResults=${
+          `${this.url}search?part=snippet&q=${query.payload}&maxResults=${
           this.numRelatedRes
           }&type=video&regionCode=${this.regionCode}&key=${
           this.apiKey

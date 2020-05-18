@@ -17,7 +17,9 @@ import * as fromRoot from './reducers/route';
 import {
   routerReducer
 } from '@ngrx/router-store';
-import { FavoriteBtnDirective } from './directives/favorite-btn.directive'
+import { FavoriteBtnDirective } from './directives/favorite-btn.directive';
+import { FormsModule } from '@angular/forms';
+
 
 export const stateKey = 'router';
 
@@ -27,6 +29,7 @@ export const stateKey = 'router';
     CommonModule,
     FeaturessRoutingModule,
     ShareModule,
+    FormsModule,
     StoreModule.forFeature('youtube', reducers),
     StoreModule.forFeature(stateKey, routerReducer),
     EffectsModule.forFeature([VideoEffects]),

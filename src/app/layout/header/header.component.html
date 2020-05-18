@@ -1,8 +1,8 @@
 <header class="col-md-12 row">
     <div class="logo col-md-2"><img class="img-reponsive" src="./assets/logo.png" alt="avatar of user" /></div>
     <div class="search col-md-8">
-        <input type="text" placeholder="Search topic you like"/>
-        <span class="fa fa-search"></span>
+        <input name="searchText" type="text" placeholder="Search topic you like" [(ngModel)]="term" (keyup)="search()"/>
+        <span class="fa fa-search" (click)="search()"></span>
     </div>
     <div class="user-field col-md-2 right" *ngIf="user">
         <img class="img-reponsive" src="//graph.facebook.com/{{user.userId}}/picture" alt="avatar of user" />

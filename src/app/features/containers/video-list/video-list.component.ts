@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { YoutubeService } from '../../services/youtube.service';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -22,8 +22,12 @@ export class VideoListComponent implements OnInit {
     private youtube: YoutubeService,
     private store: Store<fromRoot.State>,
     private route: ActivatedRoute, private router: Router) {
-    store.dispatch(new action.SearchAction('kid'));
-    this.video$ = store.pipe(select(fromRoot.getSearchResults));
+
+      this.route.params.subscribe(routeParams => {
+        const searchTerm = routeParams.search ? routeParams.search : 'kid';
+        store.dispatch(new action.SearchAction(searchTerm));
+        this.video$ = store.pipe(select(fromRoot.getSearchResults));
+      });
   }
 
   ngOnInit(): void {
@@ -65,5 +69,9 @@ export class VideoListComponent implements OnInit {
 
   addFavorite(event) {
     this.store.dispatch(new collection.AddVideoAction(event));
+  }
+
+  removeFavorite(event) {
+    this.store.dispatch(new collection.RemoveVideoAction(event));
   }
 }
