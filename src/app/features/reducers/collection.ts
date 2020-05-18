@@ -31,8 +31,8 @@ export function reducer(state = initialState, action: collection.Actions): State
       };
     }
 
-    case collection.ADD_VIDEO_SUCCESS: {
-   // case collection.REMOVE_BOOK_FAIL: {
+    case collection.ADD_VIDEO_SUCCESS:
+    case collection.REMOVE_VIDEO_FAIL: {
       const video = action.payload;
 
       if (state.ids.indexOf(video.id.videoId) > -1) {
@@ -44,7 +44,7 @@ export function reducer(state = initialState, action: collection.Actions): State
       });
     }
 
-    //case collection.REMOVE_VIDEO_SUCCESS:
+    case collection.REMOVE_VIDEO_SUCCESS:
     case collection.ADD_VIDEO_FAIL: {
       const video = action.payload;
 

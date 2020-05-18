@@ -15,7 +15,6 @@ import { Routes, RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     LayoutRoutingModule,
-    RouterModule,
     StoreModule.forFeature('router', routerReducer),
   ],
   exports: [],

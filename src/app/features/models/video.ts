@@ -12,5 +12,8 @@ export interface Video {
                 height: number
             };
         };
+        description: string;
+        channelTitle: string;
+        publishedAt: string;
     };
 }

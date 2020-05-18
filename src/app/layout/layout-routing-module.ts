@@ -9,19 +9,22 @@ import { FeaturesModule } from '../features/features.module';
 const routes: Routes = [
   {
     path: '',
+    component: MainLayoutComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'features',
+        pathMatch: 'full'
+      },
+      { path: 'features', loadChildren: '../features/features.module#FeaturesModule' },
+    ]
+  },
+  {
+    path: 'auth',
     component: LoginComponent,
     children: [
       { path: 'login', component: LoginComponent },
     ],
-
-  },
-  {
-    path: '',
-    component: MainLayoutComponent,
-    children: [
-      { path: '', loadChildren: '../features/features.module#FeaturesModule' }
-    ]
-
   }
 ];
 

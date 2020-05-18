@@ -22,8 +22,8 @@ export class VideoListComponent implements OnInit {
     private youtube: YoutubeService,
     private store: Store<fromRoot.State>,
     private route: ActivatedRoute, private router: Router) {
-   // store.dispatch(new action.SearchAction('kid'));
-    //this.video$ = store.pipe(select(fromRoot.getSearchResults));
+    store.dispatch(new action.SearchAction('kid'));
+    this.video$ = store.pipe(select(fromRoot.getSearchResults));
   }
 
   ngOnInit(): void {

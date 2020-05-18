@@ -25,6 +25,7 @@ export const stateKey = 'router';
 import {AuthGuard} from './authGuard';
 import { DBModule } from '@ngrx/db';
 import { schema } from './db';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,6 @@ import { schema } from './db';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    FeaturesModule,
     HttpClientModule,
     ShareModule,
     StoreModule.forRoot(reducers, { metaReducers }),

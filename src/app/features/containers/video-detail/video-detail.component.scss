@@ -1,0 +1,30 @@
+.card-title {
+    font-size: 0.68rem;
+}
+
+.video--date {
+    font-size: 0.68rem;
+    color: #c1c1c1;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.favorite-btn {
+    width: 50px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff7842;
+    color: #fff;
+
+    &:hover {
+        opacity: 0.6;
+    }
+    &.long{
+        width: 160px;
+        margin-right: 20px;
+        margin-bottom: 40px;
+    }
+    span{
+        margin-right: 10px;
+    }
+}

@@ -5,12 +5,12 @@ import { DBSchema } from '@ngrx/db';
  * ngrx/db uses a simple schema config object to initialize stores in IndexedDB.
  */
 export const schema: DBSchema = {
-  version: 1,
+  version: 2,
   name: 'videos_app',
   stores: {
-    books: {
+    videos: {
       autoIncrement: true,
-      primaryKey: 'id'
+      primaryKey: 'id.videoId'
     }
   }
 };

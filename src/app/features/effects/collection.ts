@@ -18,32 +18,49 @@ import { Video } from '../models/video';
 
 @Injectable()
 export class CollectionEffects {
-    constructor(private actions$: Actions, private db: Database) { }
+  constructor(private actions$: Actions, private db: Database) { }
 
-    @Effect({ dispatch: false })
-    openDB$: Observable<any> = defer(() => {
-      return this.db.open('video_app');
-    });
+  @Effect({ dispatch: false })
+  openDB$: Observable<any> = defer(() => {
+    return this.db.open('videos_app');
+  });
 
-    @Effect()
-  loadCollection$: Observable<Action> = this.actions$.pipe(
-    ofType(collection.LOAD))
-    .startWith(new collection.LoadAction())
-    .switchMap(() =>
-      this.db.query('videos')
-        .toArray()
-        .map((videos: Video[]) => new collection.LoadSuccessAction(videos))
-        .catch(error => of(new collection.LoadFailAction(error)))
-    );
+@Effect()
+loadCollection$: Observable < Action > = this.actions$.pipe(
+  ofType(collection.LOAD))
+  .startWith(new collection.LoadAction())
+  .switchMap(() =>
+    this.db.query('videos')
+      .toArray()
+      .map((videos: Video[]) => new collection.LoadSuccessAction(videos))
+      .catch(error => of(new collection.LoadFailAction(error)))
+  );
 
-    @Effect()
-  addBookToCollection$: Observable<Action> = this.actions$.pipe
-    (ofType(collection.ADD_VIDEO))
-    .map((action: collection.AddVideoAction) => action.payload)
+@Effect()
+addVideoToCollection$: Observable < Action > = this.actions$.pipe
+  (ofType(collection.ADD_VIDEO))
+  .map((action: collection.AddVideoAction) => action.payload)
+  .switchMap(video =>
+    this.db.insert('videos', [video])
+      .map(() => new collection.AddVideoSuccess(video))
+      .catch((error: any) => {
+
+        of(new collection.AddVideoFail(video));
+        console.log(error);
+        return Observable.throw(error);
+
+      })
+  );
+
+  @Effect()
+  removeVideoFromCollection$: Observable<Action> = this.actions$
+    .pipe(ofType(collection.REMOVE_VIDEO))
+    .map((action: collection.RemoveVideoAction) => action.payload)
     .mergeMap(video =>
-      this.db.insert('videos', [ video ])
-        .map(() => new collection.AddVideoSuccess(video))
-        .catch(() => of(new collection.AddVideoFail(video)))
+      this.db.executeWrite('videos', 'delete', [ video.id.videoId ])
+        .map(() => new collection.RemoveVideoSuccessAction(video))
+        .catch(() => of(new collection.RemoveVideoFailAction(video)))
     );
+
 
 }

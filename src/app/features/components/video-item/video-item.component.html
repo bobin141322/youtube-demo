@@ -5,12 +5,12 @@
     <!-- <span class="card-text">{{item.snippet.description}}</span> -->
     <span class="video--date">{{item.snippet.publishedAt| date}}</span>
 
-    <button *favoriteBtn="false" class="favorite-btn long" (click)="addCollection($event)">
+    <button *favoriteBtn="false" class="favorite-btn long" (click)="addCollection(item)">
         <span class="fa fa-heart-o"></span>
         <b>Add to Favorite</b>
     </button>
       <ng-template [favoriteBtn]="true">
-        <button class="favorite-btn" (click)="addCollection($event)">
+        <button class="favorite-btn" (click)="addCollection(item)">
             <span class="fa fa-heart-o"></span>
         </button>
       </ng-template> 

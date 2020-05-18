@@ -4,14 +4,14 @@ import { VideoListComponent, LoginComponent } from './features/index'
 import { AuthGuard } from './authGuard';
 
 //const routes: Routes = [];
-const routes: Routes = [
-  {
-    path: '',
-    component: LoginComponent,
-    // canActivate: [AuthGuard],
-  },
-  // { path: '**', redirectTo: '' }
-  ];
+const routes: Routes = [];
+  // {
+  //   path: '',
+  //   component: LoginComponent,
+  //   // canActivate: [AuthGuard],
+  // },
+  // // { path: '**', redirectTo: '' }
+  // ];
 //   {
 //     path: '',
 //     component: MainLayoutComponent,

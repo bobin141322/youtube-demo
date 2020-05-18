@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VideoListComponent, LoginComponent, VideoDetailComponent, FavoriteVideoComponent } from './index';
 
-
-
 const routes: Routes = [
     {
         path: '',
-        component: LoginComponent
+        redirectTo: 'video-list',
+        pathMatch: 'full'
     },
     {
         path: 'video-list',
